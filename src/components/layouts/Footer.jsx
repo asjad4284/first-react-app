@@ -71,13 +71,23 @@ const Footer = () => {
           <div className="flex-[1_1_200px]">
             <h3 className="text-accent-color mb-4">Follow Us</h3>
             <div className="flex gap-4">
-              {["instagram", "facebook", "twitter"].map((social) => (
+              {[
+                {
+                  name: "github",
+                  url: "https://github.com/asjad4284/first-react-app",
+                },
+                { name: "instagram", url: "#" },
+                { name: "facebook", url: "#" },
+                { name: "twitter", url: "#" },
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
+                  key={social.name}
+                  href={social.url}
+                  target={social.name === "github" ? "_blank" : "_self"}
+                  rel={social.name === "github" ? "noopener noreferrer" : ""}
                   className="w-10 h-10 rounded-full bg-bg-primary flex items-center justify-center text-text-primary no-underline transition-all duration-300 hover:bg-accent-color hover:-translate-y-[3px]"
                 >
-                  {social[0].toUpperCase()}
+                  {social.name[0].toUpperCase()}
                 </a>
               ))}
             </div>

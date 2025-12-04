@@ -8,17 +8,9 @@ import Footer from "./components/layouts/Footer";
 
 const App = () => {
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "var(--bg-primary)",
-        color: "var(--text-primary)",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div className="min-h-screen bg-bg-primary text-text-primary flex flex-col">
       <Navbar />
-      <main style={{ flex: 1 }}>
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

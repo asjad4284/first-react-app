@@ -1,70 +1,53 @@
-:root {
-  /* Modern Theme (Vibrant Orange/Dark) - Default */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #fb923c;
-  --accent-color: #f97316;
-  --accent-hover: #ea580c;
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #fb923c;
+  --color-accent-color: #f97316;
+  --color-accent-hover: #ea580c;
+
   --font-heading: "Montserrat", sans-serif;
   --font-body: "Inter", sans-serif;
-  --border-radius: 8px;
-  --shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
-  --transition-speed: 0.3s;
+
+  --shadow-custom: 0 4px 20px rgba(249, 115, 22, 0.3);
 }
 
-body {
-  margin: 0;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-body);
-  transition: background-color var(--transition-speed),
-    color var(--transition-speed);
-  overflow-x: hidden;
+@layer base {
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    @apply overflow-x-hidden;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    @apply m-0;
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  margin: 0;
-}
-
-button {
-  cursor: pointer;
-  font-family: var(--font-body);
-}
-
-/* Utility Classes */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.btn {
-  padding: 12px 24px;
-  border: none;
-  background-color: var(--accent-color);
-  color: white;
-  font-weight: bold;
-  border-radius: var(--border-radius);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.btn:hover {
-  background-color: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-
-.section {
-  padding: 80px 0;
+@layer components {
+  .btn {
+    @apply px-6 py-3 border-none text-white font-bold rounded-lg transition-all duration-300 uppercase tracking-wider cursor-pointer;
+    background-color: var(--color-accent-color);
+  }
+  .btn:hover {
+    background-color: var(--color-accent-hover);
+    box-shadow: var(--shadow-custom);
+    @apply -translate-y-0.5;
+  }
+  .section {
+    @apply py-20;
+  }
+  .container {
+    @apply max-w-[1200px] mx-auto px-5;
+  }
 }
 
 /* Animations */

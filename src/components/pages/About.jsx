@@ -29,28 +29,12 @@ const About = () => {
   return (
     <div className="animate-fade-in">
       {/* Hero / Intro */}
-      <section className="section container" style={{ textAlign: "center" }}>
+      <section className="section container text-center">
         <RevealOnScroll>
-          <h1
-            style={{
-              fontSize: "3rem",
-              marginBottom: "1.5rem",
-              color: "var(--text-secondary)",
-            }}
-          >
-            Our Mission
-          </h1>
+          <h1 className="text-[3rem] mb-6 text-text-secondary">Our Mission</h1>
         </RevealOnScroll>
         <RevealOnScroll delay={0.2}>
-          <p
-            style={{
-              fontSize: "1.2rem",
-              lineHeight: "1.8",
-              maxWidth: "800px",
-              margin: "0 auto",
-              color: "var(--text-primary)",
-            }}
-          >
+          <p className="text-xl leading-relaxed max-w-[800px] mx-auto text-text-primary">
             At Delicious Bites, we believe that dining is an experience that
             engages all the senses. Our mission is to create memories through
             food, blending tradition with innovation. We are committed to
@@ -61,103 +45,31 @@ const About = () => {
       </section>
 
       {/* Meet the Chefs */}
-      <section
-        className="section"
-        style={{ backgroundColor: "var(--bg-secondary)" }}
-      >
+      <section className="section bg-bg-secondary">
         <div className="container">
           <RevealOnScroll>
-            <h2
-              style={{
-                textAlign: "center",
-                fontSize: "2.5rem",
-                marginBottom: "3rem",
-                color: "var(--text-secondary)",
-              }}
-            >
+            <h2 className="text-center text-[2.5rem] mb-12 text-text-secondary">
               Meet the Chefs
             </h2>
           </RevealOnScroll>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "2.5rem",
-            }}
-          >
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10">
             {chefs.map((chef) => (
               <RevealOnScroll key={chef.id} delay={0.1 * chef.id}>
-                <div
-                  style={{
-                    backgroundColor: "var(--bg-primary)",
-                    borderRadius: "var(--border-radius)",
-                    overflow: "hidden",
-                    boxShadow: "var(--shadow)",
-                    transition: "transform 0.3s ease",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.transform = "translateY(-10px)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "translateY(0)")
-                  }
-                >
-                  <div style={{ height: "300px", overflow: "hidden" }}>
+                <div className="bg-bg-primary rounded-lg overflow-hidden shadow-custom transition-transform duration-300 flex flex-col h-full hover:-translate-y-2.5">
+                  <div className="h-[300px] overflow-hidden">
                     <img
                       src={chef.image}
                       alt={chef.name}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        transition: "transform 0.5s ease",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.target.style.transform = "scale(1.1)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.transform = "scale(1)")
-                      }
+                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                     />
                   </div>
-                  <div
-                    style={{
-                      padding: "2rem",
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <h3
-                      style={{
-                        color: "var(--accent-color)",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {chef.name}
-                    </h3>
-                    <h4
-                      style={{
-                        color: "var(--text-secondary)",
-                        fontSize: "0.9rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginBottom: "1rem",
-                      }}
-                    >
+                  <div className="p-8 flex-1 flex flex-col">
+                    <h3 className="text-accent-color mb-2">{chef.name}</h3>
+                    <h4 className="text-text-secondary text-sm uppercase tracking-wider mb-4">
                       {chef.role}
                     </h4>
-                    <p
-                      style={{
-                        color: "var(--text-primary)",
-                        lineHeight: "1.6",
-                        fontSize: "0.95rem",
-                      }}
-                    >
+                    <p className="text-text-primary leading-relaxed text-[0.95rem]">
                       {chef.bio}
                     </p>
                   </div>

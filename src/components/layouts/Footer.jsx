@@ -3,68 +3,28 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer
-      style={{
-        backgroundColor: "var(--bg-secondary)",
-        color: "var(--text-primary)",
-        padding: "4rem 0 2rem",
-        marginTop: "auto",
-      }}
-    >
+    <footer className="bg-bg-secondary text-text-primary py-16 mt-auto">
       <div className="container">
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-            gap: "2rem",
-            marginBottom: "3rem",
-          }}
-        >
+        <div className="flex flex-wrap justify-between gap-8 mb-12">
           {/* Brand */}
-          <div style={{ flex: "1 1 300px" }}>
-            <h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--text-secondary)",
-                marginBottom: "1rem",
-              }}
-            >
+          <div className="flex-[1_1_300px]">
+            <h2 className="font-heading text-text-secondary mb-4">
               Delicious Bites
             </h2>
-            <p style={{ lineHeight: "1.6", maxWidth: "300px" }}>
+            <p className="leading-relaxed max-w-[300px]">
               Experience the art of culinary excellence. Fresh ingredients,
               passionate chefs, and an unforgettable atmosphere.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div style={{ flex: "1 1 200px" }}>
-            <h3 style={{ color: "var(--accent-color)", marginBottom: "1rem" }}>
-              Quick Links
-            </h3>
-            <ul
-              style={{
-                listStyle: "none",
-                padding: 0,
-                margin: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-              }}
-            >
+          <div className="flex-[1_1_200px]">
+            <h3 className="text-accent-color mb-4">Quick Links</h3>
+            <ul className="list-none p-0 m-0 flex flex-col gap-2">
               <li>
                 <Link
                   to="/"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    transition: "color 0.3s",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--accent-color)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.color = "inherit")}
+                  className="text-inherit no-underline transition-colors duration-300 hover:text-accent-color"
                 >
                   Home
                 </Link>
@@ -72,15 +32,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/about"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    transition: "color 0.3s",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--accent-color)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.color = "inherit")}
+                  className="text-inherit no-underline transition-colors duration-300 hover:text-accent-color"
                 >
                   About Us
                 </Link>
@@ -88,15 +40,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/menu"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    transition: "color 0.3s",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--accent-color)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.color = "inherit")}
+                  className="text-inherit no-underline transition-colors duration-300 hover:text-accent-color"
                 >
                   Menu
                 </Link>
@@ -104,15 +48,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/reservations"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    transition: "color 0.3s",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.color = "var(--accent-color)")
-                  }
-                  onMouseLeave={(e) => (e.target.style.color = "inherit")}
+                  className="text-inherit no-underline transition-colors duration-300 hover:text-accent-color"
                 >
                   Reservations
                 </Link>
@@ -121,20 +57,9 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div style={{ flex: "1 1 200px" }}>
-            <h3 style={{ color: "var(--accent-color)", marginBottom: "1rem" }}>
-              Contact
-            </h3>
-            <ul
-              style={{
-                listStyle: "none",
-                padding: 0,
-                margin: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-              }}
-            >
+          <div className="flex-[1_1_200px]">
+            <h3 className="text-accent-color mb-4">Contact</h3>
+            <ul className="list-none p-0 m-0 flex flex-col gap-2">
               <li>123 Culinary Avenue</li>
               <li>Foodie City, FC 90210</li>
               <li>(555) 123-4567</li>
@@ -143,36 +68,14 @@ const Footer = () => {
           </div>
 
           {/* Social */}
-          <div style={{ flex: "1 1 200px" }}>
-            <h3 style={{ color: "var(--accent-color)", marginBottom: "1rem" }}>
-              Follow Us
-            </h3>
-            <div style={{ display: "flex", gap: "1rem" }}>
+          <div className="flex-[1_1_200px]">
+            <h3 className="text-accent-color mb-4">Follow Us</h3>
+            <div className="flex gap-4">
               {["instagram", "facebook", "twitter"].map((social) => (
                 <a
                   key={social}
                   href="#"
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    backgroundColor: "var(--bg-primary)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--text-primary)",
-                    textDecoration: "none",
-                    transition: "all 0.3s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor =
-                      "var(--accent-color)";
-                    e.currentTarget.style.transform = "translateY(-3px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--bg-primary)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
+                  className="w-10 h-10 rounded-full bg-bg-primary flex items-center justify-center text-text-primary no-underline transition-all duration-300 hover:bg-accent-color hover:-translate-y-[3px]"
                 >
                   {social[0].toUpperCase()}
                 </a>
@@ -181,15 +84,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div
-          style={{
-            borderTop: "1px solid #444",
-            paddingTop: "2rem",
-            textAlign: "center",
-            fontSize: "0.9rem",
-            color: "#888",
-          }}
-        >
+        <div className="border-t border-[#444] pt-8 text-center text-sm text-[#888]">
           &copy; {new Date().getFullYear()} Delicious Bites. All rights
           reserved.
         </div>

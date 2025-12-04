@@ -3,212 +3,75 @@ import RevealOnScroll from "../utils/RevealOnScroll";
 
 const SignIn = () => {
   return (
-    <div
-      className="animate-fade-in section container"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "70vh",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "420px",
-          backgroundColor: "var(--bg-secondary)",
-          padding: "2.5rem",
-          borderRadius: "var(--border-radius)",
-          boxShadow: "var(--shadow)",
-          textAlign: "center",
-        }}
-      >
+    <div className="animate-fade-in section container flex justify-center items-center min-h-[70vh]">
+      <div className="w-full max-w-[420px] bg-bg-secondary p-10 rounded-lg shadow-custom text-center">
         <RevealOnScroll>
-          <h1
-            style={{ color: "var(--text-secondary)", marginBottom: "0.5rem" }}
-          >
-            Welcome Back
-          </h1>
-          <p
-            style={{
-              color: "var(--text-primary)",
-              marginBottom: "2rem",
-              fontSize: "0.95rem",
-            }}
-          >
+          <h1 className="text-text-secondary mb-2">Welcome Back</h1>
+          <p className="text-text-primary mb-8 text-[0.95rem]">
             Sign in to access your reservations and saved favorites.
           </p>
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.2}>
-          <form
-            style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}
-          >
+          <form className="flex flex-col gap-5">
             <div>
               <input
                 type="email"
                 placeholder="Email Address"
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  borderRadius: "var(--border-radius)",
-                  border: "1px solid #444",
-                  backgroundColor: "var(--bg-primary)",
-                  color: "var(--text-primary)",
-                  outline: "none",
-                }}
-                onFocus={(e) =>
-                  (e.target.style.borderColor = "var(--accent-color)")
-                }
-                onBlur={(e) => (e.target.style.borderColor = "#444")}
+                className="w-full p-3.5 rounded-lg border border-[#444] bg-bg-primary text-text-primary outline-none focus:border-accent-color transition-colors duration-300"
               />
             </div>
             <div>
               <input
                 type="password"
                 placeholder="Password"
-                style={{
-                  width: "100%",
-                  padding: "14px",
-                  borderRadius: "var(--border-radius)",
-                  border: "1px solid #444",
-                  backgroundColor: "var(--bg-primary)",
-                  color: "var(--text-primary)",
-                  outline: "none",
-                }}
-                onFocus={(e) =>
-                  (e.target.style.borderColor = "var(--accent-color)")
-                }
-                onBlur={(e) => (e.target.style.borderColor = "#444")}
+                className="w-full p-3.5 rounded-lg border border-[#444] bg-bg-primary text-text-primary outline-none focus:border-accent-color transition-colors duration-300"
               />
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "0.85rem",
-              }}
-            >
-              <label
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  cursor: "pointer",
-                }}
-              >
+            <div className="flex justify-between text-[0.85rem]">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" /> Remember me
               </label>
-              <a
-                href="#"
-                style={{ color: "var(--accent-color)", textDecoration: "none" }}
-              >
+              <a href="#" className="text-accent-color no-underline">
                 Forgot Password?
               </a>
             </div>
 
-            <button
-              type="submit"
-              className="btn"
-              style={{ width: "100%", marginTop: "0.5rem" }}
-            >
+            <button type="submit" className="btn w-full mt-2">
               Sign In
             </button>
           </form>
 
-          <div
-            style={{
-              margin: "2rem 0",
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-              color: "#888",
-            }}
-          >
-            <div
-              style={{ flex: 1, height: "1px", backgroundColor: "#444" }}
-            ></div>
+          <div className="my-8 flex items-center gap-4 text-[#888]">
+            <div className="flex-1 h-px bg-[#444]"></div>
             <span>OR</span>
-            <div
-              style={{ flex: 1, height: "1px", backgroundColor: "#444" }}
-            ></div>
+            <div className="flex-1 h-px bg-[#444]"></div>
           </div>
 
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-          >
-            <button
-              style={{
-                width: "100%",
-                padding: "12px",
-                borderRadius: "var(--border-radius)",
-                border: "1px solid #444",
-                backgroundColor: "transparent",
-                color: "var(--text-primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "10px",
-                transition: "background-color 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  "rgba(255,255,255,0.05)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "transparent")
-              }
-            >
+          <div className="flex flex-col gap-4">
+            <button className="w-full p-3 rounded-lg border border-[#444] bg-transparent text-text-primary flex items-center justify-center gap-2.5 transition-colors duration-300 hover:bg-[rgba(255,255,255,0.05)] cursor-pointer">
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
                 alt="Google"
-                style={{ width: "20px" }}
+                className="w-5"
               />
               Continue with Google
             </button>
 
-            <button
-              style={{
-                width: "100%",
-                padding: "12px",
-                borderRadius: "var(--border-radius)",
-                border: "1px solid #444",
-                backgroundColor: "transparent",
-                color: "var(--text-primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "10px",
-                transition: "background-color 0.3s",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  "rgba(255,255,255,0.05)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "transparent")
-              }
-            >
+            <button className="w-full p-3 rounded-lg border border-[#444] bg-transparent text-text-primary flex items-center justify-center gap-2.5 transition-colors duration-300 hover:bg-[rgba(255,255,255,0.05)] cursor-pointer">
               <img
                 src="https://www.svgrepo.com/show/475647/facebook-color.svg"
                 alt="Facebook"
-                style={{ width: "20px" }}
+                className="w-5"
               />
               Continue with Facebook
             </button>
           </div>
 
-          <p style={{ marginTop: "2rem", fontSize: "0.9rem" }}>
+          <p className="mt-8 text-[0.9rem]">
             Don't have an account?{" "}
-            <a
-              href="#"
-              style={{
-                color: "var(--accent-color)",
-                fontWeight: "bold",
-                textDecoration: "none",
-              }}
-            >
+            <a href="#" className="text-accent-color font-bold no-underline">
               Create Account
             </a>
           </p>

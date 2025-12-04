@@ -5,149 +5,53 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section
-        style={{
-          position: "relative",
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-          color: "white",
-        }}
-      >
+      <section className="relative h-screen flex items-center justify-center overflow-hidden text-white z-0">
         {/* Background Image with Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundImage: "url(/images/hero.png)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter: "brightness(0.4)",
-            zIndex: -1,
-          }}
-        ></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/hero.png')] bg-cover bg-center brightness-[0.4] -z-10"></div>
 
-        <div
-          className="container"
-          style={{ textAlign: "center", position: "relative", zIndex: 1 }}
-        >
+        <div className="container text-center relative z-10">
           <RevealOnScroll>
-            <h1
-              style={{
-                fontSize: "4.5rem",
-                marginBottom: "1.5rem",
-                textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-                color: "white",
-              }}
-            >
+            <h1 className="text-[4.5rem] mb-6 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)] text-white">
               Taste the Extraordinary
             </h1>
           </RevealOnScroll>
           <RevealOnScroll delay={0.2}>
-            <p
-              style={{
-                fontSize: "1.5rem",
-                marginBottom: "2.5rem",
-                maxWidth: "700px",
-                margin: "0 auto 2.5rem",
-                color: "#f0f0f0",
-                lineHeight: "1.6",
-              }}
-            >
+            <p className="text-2xl mb-10 max-w-[700px] mx-auto text-[#f0f0f0] leading-relaxed">
               Experience culinary perfection with our award-winning menu and
               atmosphere.
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={0.4}>
-            <button
-              className="btn"
-              style={{ fontSize: "1.2rem", padding: "16px 48px" }}
-            >
-              Book a Table
-            </button>
+            <button className="btn text-xl py-4 px-12">Book a Table</button>
           </RevealOnScroll>
         </div>
       </section>
 
       {/* Featured Dishes */}
-      <section
-        className="section"
-        style={{ backgroundColor: "var(--bg-primary)" }}
-      >
+      <section className="section bg-bg-primary">
         <div className="container">
           <RevealOnScroll>
-            <h2
-              style={{
-                textAlign: "center",
-                fontSize: "2.5rem",
-                marginBottom: "3rem",
-                color: "var(--text-secondary)",
-              }}
-            >
+            <h2 className="text-center text-[2.5rem] mb-12 text-text-secondary">
               Our Signature Dishes
             </h2>
           </RevealOnScroll>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: "2rem",
-            }}
-          >
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8">
             {/* Dish Card 1 */}
             <RevealOnScroll delay={0.1}>
-              <div
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderRadius: "var(--border-radius)",
-                  overflow: "hidden",
-                  boxShadow: "var(--shadow)",
-                  transition: "transform 0.3s ease",
-                  height: "100%",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "translateY(-10px)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "translateY(0)")
-                }
-              >
+              <div className="bg-bg-secondary rounded-lg overflow-hidden shadow-custom transition-transform duration-300 h-full hover:-translate-y-2.5">
                 <img
                   src="/images/pasta.png"
                   alt="Truffle Pasta"
-                  style={{ width: "100%", height: "250px", objectFit: "cover" }}
+                  className="w-full h-[250px] object-cover"
                 />
-                <div style={{ padding: "1.5rem" }}>
-                  <h3
-                    style={{
-                      marginBottom: "0.5rem",
-                      color: "var(--accent-color)",
-                    }}
-                  >
-                    Truffle Pasta
-                  </h3>
-                  <p
-                    style={{
-                      color: "var(--text-primary)",
-                      marginBottom: "1rem",
-                    }}
-                  >
+                <div className="p-6">
+                  <h3 className="mb-2 text-accent-color">Truffle Pasta</h3>
+                  <p className="text-text-primary mb-4">
                     Handmade pasta tossed in a rich truffle cream sauce with
                     fresh herbs.
                   </p>
-                  <span
-                    style={{
-                      fontSize: "1.2rem",
-                      fontWeight: "bold",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
+                  <span className="text-xl font-bold text-text-secondary">
                     $24
                   </span>
                 </div>
@@ -156,52 +60,19 @@ const Home = () => {
 
             {/* Dish Card 2 */}
             <RevealOnScroll delay={0.2}>
-              <div
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderRadius: "var(--border-radius)",
-                  overflow: "hidden",
-                  boxShadow: "var(--shadow)",
-                  transition: "transform 0.3s ease",
-                  height: "100%",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "translateY(-10px)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "translateY(0)")
-                }
-              >
+              <div className="bg-bg-secondary rounded-lg overflow-hidden shadow-custom transition-transform duration-300 h-full hover:-translate-y-2.5">
                 <img
                   src="/images/steak.png"
                   alt="Ribeye Steak"
-                  style={{ width: "100%", height: "250px", objectFit: "cover" }}
+                  className="w-full h-[250px] object-cover"
                 />
-                <div style={{ padding: "1.5rem" }}>
-                  <h3
-                    style={{
-                      marginBottom: "0.5rem",
-                      color: "var(--accent-color)",
-                    }}
-                  >
-                    Prime Ribeye
-                  </h3>
-                  <p
-                    style={{
-                      color: "var(--text-primary)",
-                      marginBottom: "1rem",
-                    }}
-                  >
+                <div className="p-6">
+                  <h3 className="mb-2 text-accent-color">Prime Ribeye</h3>
+                  <p className="text-text-primary mb-4">
                     Grilled to perfection, served with asparagus and garlic
                     mashed potatoes.
                   </p>
-                  <span
-                    style={{
-                      fontSize: "1.2rem",
-                      fontWeight: "bold",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
+                  <span className="text-xl font-bold text-text-secondary">
                     $45
                   </span>
                 </div>
@@ -210,52 +81,19 @@ const Home = () => {
 
             {/* Dish Card 3 */}
             <RevealOnScroll delay={0.3}>
-              <div
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderRadius: "var(--border-radius)",
-                  overflow: "hidden",
-                  boxShadow: "var(--shadow)",
-                  transition: "transform 0.3s ease",
-                  height: "100%",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "translateY(-10px)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "translateY(0)")
-                }
-              >
+              <div className="bg-bg-secondary rounded-lg overflow-hidden shadow-custom transition-transform duration-300 h-full hover:-translate-y-2.5">
                 <img
                   src="/images/dessert.png"
                   alt="Lava Cake"
-                  style={{ width: "100%", height: "250px", objectFit: "cover" }}
+                  className="w-full h-[250px] object-cover"
                 />
-                <div style={{ padding: "1.5rem" }}>
-                  <h3
-                    style={{
-                      marginBottom: "0.5rem",
-                      color: "var(--accent-color)",
-                    }}
-                  >
-                    Chocolate Lava
-                  </h3>
-                  <p
-                    style={{
-                      color: "var(--text-primary)",
-                      marginBottom: "1rem",
-                    }}
-                  >
+                <div className="p-6">
+                  <h3 className="mb-2 text-accent-color">Chocolate Lava</h3>
+                  <p className="text-text-primary mb-4">
                     Decadent warm chocolate cake with a molten center and
                     vanilla bean ice cream.
                   </p>
-                  <span
-                    style={{
-                      fontSize: "1.2rem",
-                      fontWeight: "bold",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
+                  <span className="text-xl font-bold text-text-secondary">
                     $12
                   </span>
                 </div>
@@ -266,52 +104,23 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section
-        className="section"
-        style={{ backgroundColor: "var(--bg-secondary)" }}
-      >
-        <div
-          className="container"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ flex: 1, minWidth: "300px" }}>
+      <section className="section bg-bg-secondary">
+        <div className="container flex items-center gap-16 flex-wrap">
+          <div className="flex-1 min-w-[300px]">
             <RevealOnScroll>
-              <h2
-                style={{
-                  fontSize: "2.5rem",
-                  marginBottom: "1.5rem",
-                  color: "var(--text-secondary)",
-                }}
-              >
+              <h2 className="text-[2.5rem] mb-6 text-text-secondary">
                 Our Story
               </h2>
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
-              <p
-                style={{
-                  fontSize: "1.1rem",
-                  lineHeight: "1.8",
-                  marginBottom: "1.5rem",
-                }}
-              >
+              <p className="text-lg leading-relaxed mb-6">
                 Founded in 2010, Delicious Bites has been serving the community
                 with passion and creativity. We believe that food is not just
                 sustenance, but an art form that brings people together.
               </p>
             </RevealOnScroll>
             <RevealOnScroll delay={0.2}>
-              <p
-                style={{
-                  fontSize: "1.1rem",
-                  lineHeight: "1.8",
-                  marginBottom: "2rem",
-                }}
-              >
+              <p className="text-lg leading-relaxed mb-8">
                 Our chefs source only the finest local ingredients to create
                 dishes that are both comforting and innovative.
               </p>
@@ -320,23 +129,9 @@ const Home = () => {
               <button className="btn">Learn More</button>
             </RevealOnScroll>
           </div>
-          <div style={{ flex: 1, minWidth: "300px" }}>
+          <div className="flex-1 min-w-[300px]">
             <RevealOnScroll delay={0.2}>
-              <div
-                style={{
-                  width: "100%",
-                  height: "400px",
-                  backgroundColor: "var(--bg-primary)",
-                  borderRadius: "var(--border-radius)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "2px solid var(--accent-color)",
-                  backgroundImage: "url(/images/chef3.png)",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
+              <div className="w-full h-[400px] bg-bg-primary rounded-lg flex items-center justify-center border-2 border-accent-color bg-[url('/images/chef3.png')] bg-cover bg-center"></div>
             </RevealOnScroll>
           </div>
         </div>

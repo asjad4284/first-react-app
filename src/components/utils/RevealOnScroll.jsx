@@ -1,45 +1,55 @@
-import React, { useEffect, useRef, useState } from "react";
+import { motion } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef } from 'react'
 
-const RevealOnScroll = ({ children, threshold = 0.1, delay = 0 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+const RevealOnScroll = ({
+  children,
+  direction = 'up',
+  delay = 0,
+  duration = 0.6,
+  className = '',
+  once = true,
+  amount = 0.3,
+}) => {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once, amount })
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
+  const directions = {
+    up: { y: 60, x: 0 },
+    down: { y: -60, x: 0 },
+    left: { x: 60, y: 0 },
+    right: { x: -60, y: 0 },
+    none: { x: 0, y: 0 },
+  }
+
+  const variants = {
+    hidden: {
+      opacity: 0,
+      ...directions[direction],
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: {
+        duration,
+        delay,
+        ease: [0.16, 1, 0.3, 1], // Custom easing for smooth animation
       },
-      {
-        threshold: threshold,
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [threshold]);
+    },
+  }
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(30px)",
-        transition: `opacity 0.8s ease ${delay}s, transform 0.8s ease ${delay}s`,
-      }}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      variants={variants}
+      className={className}
     >
       {children}
-    </div>
-  );
-};
+    </motion.div>
+  )
+}
 
-export default RevealOnScroll;
+export default RevealOnScroll

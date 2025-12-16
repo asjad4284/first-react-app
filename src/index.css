@@ -49,9 +49,9 @@
   background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-terracotta) 100%);
 }
 
-/* Smooth Scrolling */
+/* Smooth Scrolling - Disabled for better performance with framer-motion */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 /* Base Body Styles */
@@ -61,6 +61,18 @@ body {
   color: var(--color-charcoal);
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU acceleration for animated elements */
+.will-change-transform {
+  will-change: transform;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Premium Heading Font */
@@ -229,19 +241,21 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
-/* Glass Effect - Premium */
+/* Glass Effect - Premium (Optimized) */
 .glass {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  will-change: auto;
 }
 
 .glass-dark {
-  background: rgba(26, 26, 46, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(26, 26, 46, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  will-change: auto;
 }
 
 /* Premium Card Hover Effect */

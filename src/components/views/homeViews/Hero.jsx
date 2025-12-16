@@ -66,30 +66,15 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-60"></div>
       </div>
 
-      {/* Floating Decorative Elements */}
-      <motion.div 
+      {/* Floating Decorative Elements - Static for performance */}
+      <div 
         className="absolute top-20 left-10 w-24 h-24 bg-gradient-to-br from-[#c4a77d]/20 to-[#d4af37]/10 rounded-full blur-2xl"
-        animate={{ 
-          y: [0, -20, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div 
+      <div 
         className="absolute bottom-40 right-20 w-40 h-40 bg-gradient-to-br from-[#d4af37]/15 to-[#c4a77d]/10 rounded-full blur-3xl"
-        animate={{ 
-          y: [0, 20, 0],
-          scale: [1, 1.15, 1],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
-      <motion.div 
+      <div 
         className="absolute top-1/3 right-1/4 w-20 h-20 bg-[#c4a77d]/10 rounded-full blur-xl"
-        animate={{ 
-          x: [0, 15, 0],
-          y: [0, -15, 0],
-        }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       />
 
       {/* Content */}

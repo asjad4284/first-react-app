@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 
 const RevealOnScroll = ({
   children,
@@ -9,20 +9,20 @@ const RevealOnScroll = ({
   duration = 0.6,
   className = '',
   once = true,
-  amount = 0.3,
+  amount = 0.2,
 }) => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once, amount })
+  const isInView = useInView(ref, { once, amount, margin: "-50px" })
 
-  const directions = {
-    up: { y: 60, x: 0 },
-    down: { y: -60, x: 0 },
-    left: { x: 60, y: 0 },
-    right: { x: -60, y: 0 },
+  const directions = useMemo(() => ({
+    up: { y: 40, x: 0 },
+    down: { y: -40, x: 0 },
+    left: { x: 40, y: 0 },
+    right: { x: -40, y: 0 },
     none: { x: 0, y: 0 },
-  }
+  }), [])
 
-  const variants = {
+  const variants = useMemo(() => ({
     hidden: {
       opacity: 0,
       ...directions[direction],
@@ -34,10 +34,10 @@ const RevealOnScroll = ({
       transition: {
         duration,
         delay,
-        ease: [0.16, 1, 0.3, 1], // Custom easing for smooth animation
+        ease: [0.25, 0.1, 0.25, 1], // Simpler easing for better performance
       },
     },
-  }
+  }), [direction, duration, delay, directions])
 
   return (
     <motion.div
@@ -46,6 +46,7 @@ const RevealOnScroll = ({
       animate={isInView ? 'visible' : 'hidden'}
       variants={variants}
       className={className}
+      style={{ willChange: isInView ? 'auto' : 'transform, opacity' }}
     >
       {children}
     </motion.div>

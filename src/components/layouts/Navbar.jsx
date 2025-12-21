@@ -24,6 +24,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
+    { name: 'Items', path: '/items' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ]
@@ -68,7 +69,7 @@ const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-[#faf8f5]/98 shadow-[0_2px_15px_rgba(0,0,0,0.08)] py-3'
-          : 'bg-transparent py-5'
+          : 'bg-[#faf8f5]/85 backdrop-blur-md py-5'
       }`}
       style={{ willChange: 'background-color, padding' }}
     >
@@ -86,7 +87,7 @@ const Navbar = () => {
             </motion.div>
             <span
               className={`text-2xl font-bold font-['Playfair_Display'] transition-colors duration-500 ${
-                isScrolled ? 'text-[#1a1a2e]' : 'text-white'
+                isScrolled ? 'text-[#1a1a2e]' : 'text-[#1a1a2e]'
               }`}
             >
               Delicious<span className="text-[#c4a77d]">Bites</span>
@@ -101,13 +102,9 @@ const Navbar = () => {
                 to={link.path}
                 className={({ isActive }) =>
                   `nav-link text-sm font-semibold tracking-wider uppercase transition-all duration-300 ${
-                    isScrolled
-                      ? isActive
-                        ? 'text-[#c4a77d]'
-                        : 'text-[#1a1a2e] hover:text-[#c4a77d]'
-                      : isActive
-                      ? 'text-[#d4af37]'
-                      : 'text-white/90 hover:text-[#d4af37]'
+                    isActive
+                      ? 'text-[#c4a77d]'
+                      : 'text-[#1a1a2e] hover:text-[#c4a77d]'
                   }`
                 }
               >
@@ -138,27 +135,21 @@ const Navbar = () => {
                   rotate: isMobileMenuOpen ? 45 : 0,
                   y: isMobileMenuOpen ? 9 : 0,
                 }}
-                className={`block h-0.5 w-full rounded-full transition-colors duration-300 ${
-                  isScrolled ? 'bg-[#1a1a2e]' : 'bg-white'
-                }`}
+                className={`block h-0.5 w-full rounded-full transition-colors duration-300 bg-[#1a1a2e]`}
               />
               <motion.span
                 animate={{
                   opacity: isMobileMenuOpen ? 0 : 1,
                   x: isMobileMenuOpen ? -20 : 0,
                 }}
-                className={`block h-0.5 w-full rounded-full transition-colors duration-300 ${
-                  isScrolled ? 'bg-[#1a1a2e]' : 'bg-white'
-                }`}
+                className={`block h-0.5 w-full rounded-full transition-colors duration-300 bg-[#1a1a2e]`}
               />
               <motion.span
                 animate={{
                   rotate: isMobileMenuOpen ? -45 : 0,
                   y: isMobileMenuOpen ? -9 : 0,
                 }}
-                className={`block h-0.5 w-full rounded-full transition-colors duration-300 ${
-                  isScrolled ? 'bg-[#1a1a2e]' : 'bg-white'
-                }`}
+                className={`block h-0.5 w-full rounded-full transition-colors duration-300 bg-[#1a1a2e]`}
               />
             </div>
           </motion.button>

@@ -3,19 +3,26 @@ import { useParams, useNavigate } from 'react-router-dom'
 import SectionTitle from '../ui/SectionTitle'
 import { motion } from 'framer-motion'
 import { getItemById, updateItem } from '../../services/firestoreService'
+import { useAuth } from '../../context/AuthContext'
 
 export default function EditItemPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user, userData } = useAuth()
   const [loading, setLoading] = useState(true)
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState(null)
+  const [item, setItem] = useState(null)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     price: '',
     image: '',
   })
+
+  const isAdmin = userData?.role === 'admin'
+  const isOwner = item?.createdBy === user?.uid
+  const canModify = isAdmin || isOwner
 
   useEffect(() => {
     fetchItem()
@@ -25,12 +32,23 @@ export default function EditItemPage() {
     try {
       setLoading(true)
       setError(null)
-      const item = await getItemById(id)
+      const fetchedItem = await getItemById(id)
+      setItem(fetchedItem)
+      
+      // Check if user can modify this item
+      const userIsAdmin = userData?.role === 'admin'
+      const userIsOwner = fetchedItem.createdBy === user?.uid
+      
+      if (!userIsAdmin && !userIsOwner) {
+        setError('You do not have permission to edit this item')
+        return
+      }
+      
       setFormData({
-        name: item.name,
-        description: item.description,
-        price: item.price.toString(),
-        image: item.image || '',
+        name: fetchedItem.name,
+        description: fetchedItem.description,
+        price: fetchedItem.price.toString(),
+        image: fetchedItem.image || '',
       })
     } catch (err) {
       setError('Failed to load item')
@@ -63,7 +81,7 @@ export default function EditItemPage() {
         description: formData.description,
         price: parseFloat(formData.price),
         image: formData.image || 'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?q=80&w=2070',
-      })
+      }, userData?.role)
 
       navigate(`/item/${id}`)
     } catch (err) {

@@ -1,14 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { getItemById } from '../../services/firestoreService'
+import { getItemById, deleteItem } from '../../services/firestoreService'
+import { useAuth } from '../../context/AuthContext'
 
 export default function ViewItemPage() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { user, userData, isAuthenticated } = useAuth()
   const [item, setItem] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [deleteLoading, setDeleteLoading] = useState(false)
+
+  const isAdmin = userData?.role === 'admin'
+  const isOwner = item?.createdBy === user?.uid
+  const canModify = isAdmin || isOwner
 
   useEffect(() => {
     fetchItem()
@@ -108,18 +115,45 @@ export default function ViewItemPage() {
                 <p className="text-3xl font-bold text-orange-500 mb-4">
                   ${item.price.toFixed(2)}
                 </p>
+                {item.createdByEmail && (
+                  <p className="text-sm text-gray-500">
+                    Created by: {item.createdByEmail}
+                  </p>
+                )}
               </div>
 
               <div className="flex gap-4 pt-6">
-                <button
-                  onClick={() => navigate(`/edit-item/${item.id}`)}
-                  className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition font-medium"
-                >
-                  Edit Item
-                </button>
+                {canModify && (
+                  <>
+                    <button
+                      onClick={() => navigate(`/edit-item/${item.id}`)}
+                      className="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition font-medium"
+                    >
+                      Edit Item
+                    </button>
+                    <button
+                      onClick={async () => {
+                        if (!window.confirm('Are you sure you want to delete this item?')) return
+                        setDeleteLoading(true)
+                        try {
+                          await deleteItem(item.id, userData?.role)
+                          navigate('/items')
+                        } catch (err) {
+                          alert(err.message || 'Failed to delete item')
+                        } finally {
+                          setDeleteLoading(false)
+                        }
+                      }}
+                      disabled={deleteLoading}
+                      className="flex-1 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition font-medium disabled:opacity-50"
+                    >
+                      {deleteLoading ? 'Deleting...' : 'Delete Item'}
+                    </button>
+                  </>
+                )}
                 <button
                   onClick={() => navigate('/items')}
-                  className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition font-medium"
+                  className={`${canModify ? '' : 'flex-1'} bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition font-medium`}
                 >
                   Back to Menu
                 </button>

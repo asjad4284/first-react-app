@@ -5,11 +5,13 @@ import { useAuth } from '../../context/AuthContext'
 import { logOut } from '../../services/authService'
 
 const Navbar = () => {
-  const { user, isAuthenticated } = useAuth()
+  const { user, userData, isAuthenticated } = useAuth()
   const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
+  
+  const isAdmin = userData?.role === 'admin'
 
   useEffect(() => {
     let ticking = false
@@ -176,8 +178,24 @@ const Navbar = () => {
                       <div className="p-4 border-b border-[#e5e1db]">
                         <p className="font-semibold text-[#1a1a2e] truncate">{user?.displayName || 'User'}</p>
                         <p className="text-sm text-gray-500 truncate">{user?.email}</p>
+                        {isAdmin && (
+                          <span className="inline-block mt-1 px-2 py-0.5 bg-red-100 text-red-600 text-xs font-semibold rounded-full">
+                            Admin
+                          </span>
+                        )}
                       </div>
                       <div className="p-2">
+                        {/* Dashboard Link - shows different dashboards based on role */}
+                        <Link
+                          to={isAdmin ? "/admin" : "/dashboard"}
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className="flex items-center gap-3 px-3 py-2 rounded-xl text-[#1a1a2e] hover:bg-[#faf8f5] transition-colors"
+                        >
+                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          </svg>
+                          {isAdmin ? 'Admin Dashboard' : 'My Dashboard'}
+                        </Link>
                         <Link
                           to="/profile"
                           onClick={() => setIsUserMenuOpen(false)}

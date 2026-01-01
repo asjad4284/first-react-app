@@ -5,14 +5,25 @@ import { motion } from 'framer-motion'
 import { deleteItem } from '../../services/firestoreService'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../../config/firebaseConfig'
+import { useAuth } from '../../context/AuthContext'
 
 export default function ViewAllItemsPage() {
   const navigate = useNavigate()
+  const { user, userData, isAuthenticated } = useAuth()
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [deletingId, setDeletingId] = useState(null)
   const unsubscribeRef = useRef(null)
+
+  const isAdmin = userData?.role === 'admin'
+  
+  // Check if user can modify a specific item
+  const canModifyItem = (item) => {
+    if (!isAuthenticated) return false
+    if (isAdmin) return true
+    return item.createdBy === user?.uid
+  }
 
   useEffect(() => {
     // Only set up listener once
@@ -83,11 +94,11 @@ export default function ViewAllItemsPage() {
     if (window.confirm('Are you sure you want to delete this item?')) {
       try {
         setDeletingId(itemId)
-        await deleteItem(itemId)
+        await deleteItem(itemId, userData?.role)
         // Update UI immediately after deletion
         setItems(items.filter(item => item.id !== itemId))
       } catch (err) {
-        alert('Failed to delete item')
+        alert(err.message || 'Failed to delete item')
         console.error('Error:', err)
       } finally {
         setDeletingId(null)
@@ -195,27 +206,36 @@ export default function ViewAllItemsPage() {
                     <span className="text-orange-500 font-bold text-lg">
                       ${item.price.toFixed(2)}
                     </span>
+                    {item.createdBy === user?.uid && (
+                      <span className="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">
+                        Your Item
+                      </span>
+                    )}
                   </div>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className={`grid ${canModifyItem(item) ? 'grid-cols-3' : 'grid-cols-1'} gap-2`}>
                     <button
                       onClick={() => navigate(`/item/${item.id}`)}
                       className="bg-green-500 text-white px-2 py-1 rounded text-sm hover:bg-green-600 transition"
                     >
                       View
                     </button>
-                    <button
-                      onClick={() => navigate(`/edit-item/${item.id}`)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600 transition"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(item.id)}
-                      disabled={deletingId === item.id}
-                      className="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600 transition disabled:bg-gray-400"
-                    >
-                      {deletingId === item.id ? '...' : 'Delete'}
-                    </button>
+                    {canModifyItem(item) && (
+                      <>
+                        <button
+                          onClick={() => navigate(`/edit-item/${item.id}`)}
+                          className="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600 transition"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item.id)}
+                          disabled={deletingId === item.id}
+                          className="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600 transition disabled:bg-gray-400"
+                        >
+                          {deletingId === item.id ? '...' : 'Delete'}
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </motion.div>

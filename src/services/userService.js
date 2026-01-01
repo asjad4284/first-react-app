@@ -26,6 +26,7 @@ export const createUser = async (userId, userData) => {
       displayName: userData.displayName || '',
       photoURL: userData.photoURL || '',
       provider: userData.provider || 'email',
+      role: userData.role || 'user', // Default role is 'user', can be 'admin'
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     }

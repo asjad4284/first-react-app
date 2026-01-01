@@ -54,17 +54,22 @@ const SignInPage = () => {
           return
         }
 
-        // Store user data in Firestore
-        await createUser(user.uid, {
-          email: user.email,
-          displayName: formData.name,
-          provider: 'email',
-        })
+        // Store user data in Firestore (don't fail signup if this fails)
+        try {
+          await createUser(user.uid, {
+            email: user.email,
+            displayName: formData.name,
+            provider: 'email',
+          })
+        } catch (firestoreError) {
+          console.error('Firestore error (non-blocking):', firestoreError)
+        }
 
         navigate('/')
       }
     } catch (err) {
-      setError('An unexpected error occurred. Please try again.')
+      console.error('Auth error:', err)
+      setError(err.message || 'An unexpected error occurred. Please try again.')
     }
     setLoading(false)
   }
@@ -81,17 +86,22 @@ const SignInPage = () => {
         return
       }
 
-      // Store user data in Firestore (won't create duplicate)
-      await createUser(user.uid, {
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-        provider: 'google',
-      })
+      // Store user data in Firestore (don't fail signin if this fails)
+      try {
+        await createUser(user.uid, {
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          provider: 'google',
+        })
+      } catch (firestoreError) {
+        console.error('Firestore error (non-blocking):', firestoreError)
+      }
 
       navigate('/')
     } catch (err) {
-      setError('An unexpected error occurred. Please try again.')
+      console.error('Google auth error:', err)
+      setError(err.message || 'An unexpected error occurred. Please try again.')
     }
     setLoading(false)
   }

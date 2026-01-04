@@ -30,7 +30,7 @@ const AdminDashboard = () => {
       const usersData = usersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
       setUsers(usersData)
     } catch (error) {
-      console.error('Error fetching data:', error)
+      setError('Failed to load data')
     } finally {
       setLoading(false)
     }
@@ -44,7 +44,6 @@ const AdminDashboard = () => {
       await deleteItem(itemId)
       setItems(items.filter(item => item.id !== itemId))
     } catch (error) {
-      console.error('Error deleting item:', error)
       alert('Failed to delete item')
     } finally {
       setDeleteLoading(null)

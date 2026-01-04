@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }) => {
           setUserData(data)
         } catch (error) {
           // User data might not exist yet, especially for new users
-          console.log('User data not found in Firestore')
           setUserData(null)
         }
       } else {
@@ -47,7 +46,7 @@ export const AuthProvider = ({ children }) => {
         const data = await getUserById(user.uid)
         setUserData(data)
       } catch (error) {
-        console.error('Error refreshing user data:', error)
+        // Silently fail
       }
     }
   }

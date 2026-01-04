@@ -34,7 +34,6 @@ export const createUser = async (userId, userData) => {
     await setDoc(doc(db, USERS_COLLECTION, userId), userDoc)
     return { id: userId, ...userDoc }
   } catch (error) {
-    console.error('Error creating user:', error)
     throw error
   }
 }
@@ -48,7 +47,6 @@ export const getUserById = async (userId) => {
     }
     throw new Error('User not found')
   } catch (error) {
-    console.error('Error getting user:', error)
     throw error
   }
 }
@@ -63,7 +61,6 @@ export const updateUser = async (userId, userData) => {
     })
     return { id: userId, ...userData }
   } catch (error) {
-    console.error('Error updating user:', error)
     throw error
   }
 }
@@ -74,7 +71,6 @@ export const deleteUserFromFirestore = async (userId) => {
     await deleteDoc(doc(db, USERS_COLLECTION, userId))
     return { success: true }
   } catch (error) {
-    console.error('Error deleting user:', error)
     throw error
   }
 }
@@ -85,7 +81,6 @@ export const checkUserExists = async (userId) => {
     const userDoc = await getDoc(doc(db, USERS_COLLECTION, userId))
     return userDoc.exists()
   } catch (error) {
-    console.error('Error checking user:', error)
     return false
   }
 }

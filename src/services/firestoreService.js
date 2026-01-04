@@ -62,7 +62,6 @@ export const getAllItems = async () => {
     })
     return items
   } catch (error) {
-    console.error('Error getting items:', error)
     throw error
   }
 }
@@ -82,7 +81,6 @@ export const getItemsByUser = async (userId) => {
     })
     return items
   } catch (error) {
-    console.error('Error getting user items:', error)
     throw error
   }
 }

@@ -56,14 +56,11 @@ export default function ViewAllItemsPage() {
             setLoading(false)
             setError(null)
           } catch (err) {
-            console.error('Error processing snapshot:', err)
             setError('Error processing data: ' + err.message)
             setLoading(false)
           }
         },
         (err) => {
-          console.error('Firestore listener error:', err)
-          
           let errorMsg = 'Failed to load items'
           if (err.code === 'permission-denied') {
             errorMsg = 'Permission denied. Check Firestore security rules.'
@@ -76,7 +73,6 @@ export default function ViewAllItemsPage() {
         }
       )
     } catch (err) {
-      console.error('Setup error:', err)
       setError('Failed to set up listener: ' + err.message)
       setLoading(false)
     }
@@ -99,7 +95,6 @@ export default function ViewAllItemsPage() {
         setItems(items.filter(item => item.id !== itemId))
       } catch (err) {
         alert(err.message || 'Failed to delete item')
-        console.error('Error:', err)
       } finally {
         setDeletingId(null)
       }
@@ -124,9 +119,6 @@ export default function ViewAllItemsPage() {
       transition: { duration: 0.3 },
     },
   }
-
-  // Log render state
-  console.log('RENDER STATE - loading:', loading, 'items.length:', items.length, 'error:', error)
 
   return (
     <motion.div

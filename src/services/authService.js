@@ -28,7 +28,6 @@ export const signUpWithEmail = async (email, password, displayName) => {
     }
     return { user: userCredential.user, error: null }
   } catch (error) {
-    console.error('Sign up error:', error.code, error.message)
     return { user: null, error: getErrorMessage(error.code) }
   }
 }
@@ -39,7 +38,6 @@ export const signInWithEmail = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     return { user: userCredential.user, error: null }
   } catch (error) {
-    console.error('Sign in error:', error.code, error.message)
     return { user: null, error: getErrorMessage(error.code) }
   }
 }

@@ -29,7 +29,6 @@ export default function ViewItemPage() {
       setItem(fetchedItem)
     } catch (err) {
       setError('Failed to load item')
-      console.error('Error:', err)
     } finally {
       setLoading(false)
     }

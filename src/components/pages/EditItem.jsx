@@ -4,6 +4,7 @@ import SectionTitle from '../ui/SectionTitle'
 import { motion } from 'framer-motion'
 import { getItemById, updateItem } from '../../services/firestoreService'
 import { useAuth } from '../../context/AuthContext'
+import Skeleton from '../ui/Skeleton'
 
 export default function EditItemPage() {
   const { id } = useParams()
@@ -97,11 +98,17 @@ export default function EditItemPage() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen bg-gray-50 py-12 px-4 flex justify-center items-center"
+        className="min-h-screen bg-gray-50 py-12 px-4"
       >
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-          <p className="mt-4 text-gray-600">Loading item...</p>
+        <div className="max-w-2xl mx-auto space-y-6">
+          <Skeleton variant="title" className="h-10 w-48" />
+          <div className="bg-white rounded-2xl p-8 shadow-xl space-y-6">
+            <Skeleton count={6} className="h-12" />
+            <div className="flex gap-4">
+              <Skeleton className="h-12 flex-1" />
+              <Skeleton className="h-12 flex-1" />
+            </div>
+          </div>
         </div>
       </motion.div>
     )

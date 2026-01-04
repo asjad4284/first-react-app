@@ -52,10 +52,22 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#faf8f5] flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#c4a77d]"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+      <div className="min-h-screen bg-[#faf8f5] py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <div className="h-10 w-64 bg-gray-200 rounded animate-pulse mb-2"></div>
+            <div className="h-4 w-48 bg-gray-200 rounded animate-pulse"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-2xl p-6 shadow-lg">
+                <div className="h-20 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+          <div className="bg-white rounded-2xl p-6 shadow-lg">
+            <SkeletonTable rows={5} columns={4} />
+          </div>
         </div>
       </div>
     )

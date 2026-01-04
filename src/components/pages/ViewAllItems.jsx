@@ -6,6 +6,7 @@ import { deleteItem } from '../../services/firestoreService'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../../config/firebaseConfig'
 import { useAuth } from '../../context/AuthContext'
+import { SkeletonCard } from '../ui/Skeleton'
 
 export default function ViewAllItemsPage() {
   const navigate = useNavigate()
@@ -149,11 +150,10 @@ export default function ViewAllItemsPage() {
         )}
 
         {loading && (
-          <div className="flex justify-center items-center min-h-96">
-            <div className="text-center">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-              <p className="mt-4 text-gray-600">Loading items...</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
           </div>
         )}
 

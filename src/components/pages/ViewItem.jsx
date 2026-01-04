@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getItemById, deleteItem } from '../../services/firestoreService'
 import { useAuth } from '../../context/AuthContext'
+import { SkeletonItemDetail } from '../ui/Skeleton'
 
 export default function ViewItemPage() {
   const { id } = useParams()
@@ -39,12 +40,9 @@ export default function ViewItemPage() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen bg-gray-50 py-12 px-4 flex justify-center items-center"
+        className="min-h-screen bg-gray-50 py-12 px-4"
       >
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
-          <p className="mt-4 text-gray-600">Loading item...</p>
-        </div>
+        <SkeletonItemDetail />
       </motion.div>
     )
   }

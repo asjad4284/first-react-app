@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../ui'
 import { signUpWithEmail, signInWithEmail, signInWithGoogle, resetPassword } from '../../services/authService'
 import { createUser } from '../../services/userService'
+import Navbar from '../layouts/Navbar'
 
 const SignInPage = () => {
   const navigate = useNavigate()
@@ -129,7 +130,9 @@ const SignInPage = () => {
   }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="min-h-screen bg-[#faf8f5] flex items-center justify-center py-12 px-4">
+    <>
+      <Navbar />
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5 }} className="min-h-screen bg-[#faf8f5] flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
         {/* Logo */}
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
@@ -271,6 +274,7 @@ const SignInPage = () => {
         </motion.p>
       </div>
     </motion.div>
+    </>
   )
 }
 

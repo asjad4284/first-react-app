@@ -70,6 +70,8 @@ function App() {
                 </AdminRoute>
               } />
             </Route>
+            
+            {/* Auth Route - Outside MainLayout (no footer) */}
             <Route path="/signin" element={<SignInPage />} />
           </Routes>
         </AnimatePresence>

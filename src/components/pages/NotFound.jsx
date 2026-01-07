@@ -8,7 +8,7 @@ const NotFound = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-[60vh] flex items-center justify-center px-4"
+      className="min-h-[60vh] flex items-center justify-center px-4 pt-24 md:pt-32"
     >
       <div className="text-center max-w-2xl mx-auto">
         <motion.h1

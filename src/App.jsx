@@ -22,6 +22,7 @@ const CreateItemPage = lazy(() => import('./components/pages/CreateItem'))
 const ViewAllItemsPage = lazy(() => import('./components/pages/ViewAllItems'))
 const ViewItemPage = lazy(() => import('./components/pages/ViewItem'))
 const EditItemPage = lazy(() => import('./components/pages/EditItem'))
+const NotFoundPage = lazy(() => import('./components/pages/NotFound'))
 
 function App() {
   const location = useLocation()
@@ -69,6 +70,9 @@ function App() {
                   <AdminDashboard />
                 </AdminRoute>
               } />
+              
+              {/* 404 Not Found - Inside MainLayout */}
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
             
             {/* Auth Route - Outside MainLayout (no footer) */}

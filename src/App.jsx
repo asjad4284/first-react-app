@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import { AuthProvider } from './context/AuthContext'
 import { ProtectedRoute, AdminRoute } from './components/routes/ProtectedRoute'
 import LoadingFallback from './components/ui/LoadingFallback'
+import PageTransition from './components/utils/PageTransition'
 
 // Lazy load layout
 const MainLayout = lazy(() => import('./components/layouts/MainLayout'))
@@ -34,49 +35,49 @@ function App() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<MainLayout />}>
               {/* Public Routes */}
-              <Route index element={<HomePage />} />
-              <Route path="menu" element={<MenuPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="contact" element={<ContactPage />} />
-              <Route path="reservation" element={<ReservationPage />} />
-              <Route path="items" element={<ViewAllItemsPage />} />
-              <Route path="item/:id" element={<ViewItemPage />} />
+              <Route index element={<PageTransition><HomePage /></PageTransition>} />
+              <Route path="menu" element={<PageTransition><MenuPage /></PageTransition>} />
+              <Route path="about" element={<PageTransition><AboutPage /></PageTransition>} />
+              <Route path="contact" element={<PageTransition><ContactPage /></PageTransition>} />
+              <Route path="reservation" element={<PageTransition><ReservationPage /></PageTransition>} />
+              <Route path="items" element={<PageTransition><ViewAllItemsPage /></PageTransition>} />
+              <Route path="item/:id" element={<PageTransition><ViewItemPage /></PageTransition>} />
               
               {/* Protected Routes - Requires Authentication */}
               <Route path="profile" element={
                 <ProtectedRoute>
-                  <ProfilePage />
+                  <PageTransition><ProfilePage /></PageTransition>
                 </ProtectedRoute>
               } />
               <Route path="dashboard" element={
                 <ProtectedRoute>
-                  <UserDashboard />
+                  <PageTransition><UserDashboard /></PageTransition>
                 </ProtectedRoute>
               } />
               <Route path="create-item" element={
                 <ProtectedRoute>
-                  <CreateItemPage />
+                  <PageTransition><CreateItemPage /></PageTransition>
                 </ProtectedRoute>
               } />
               <Route path="edit-item/:id" element={
                 <ProtectedRoute>
-                  <EditItemPage />
+                  <PageTransition><EditItemPage /></PageTransition>
                 </ProtectedRoute>
               } />
               
               {/* Admin Routes - Requires Admin Role */}
               <Route path="admin" element={
                 <AdminRoute>
-                  <AdminDashboard />
+                  <PageTransition><AdminDashboard /></PageTransition>
                 </AdminRoute>
               } />
               
               {/* 404 Not Found - Inside MainLayout */}
-              <Route path="*" element={<NotFoundPage />} />
+              <Route path="*" element={<PageTransition><NotFoundPage /></PageTransition>} />
             </Route>
             
             {/* Auth Route - Outside MainLayout (no footer) */}
-            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signin" element={<PageTransition><SignInPage /></PageTransition>} />
           </Routes>
         </AnimatePresence>
       </Suspense>
